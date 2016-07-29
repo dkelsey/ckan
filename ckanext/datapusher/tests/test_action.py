@@ -30,7 +30,7 @@ class TestDataPusherAction(object):
             'entity_id': resource_id,
             'entity_type': 'resource',
             'task_type': 'datapusher',
-            'last_updated': str(datetime.datetime.now()),
+            'last_updated': str(datetime.datetime.utcnow()),
             'state': 'pending',
             'key': 'datapusher',
             'value': '{}',
@@ -168,7 +168,7 @@ class TestDataPusherAction(object):
                             package_id=dataset['id'],
                             url='http://example.com/file.csv',
                             format='CSV',
-                            last_modified=datetime.datetime.now().isoformat()
+                            last_modified=datetime.datetime.utcnow().isoformat()
                             )
         # Not called
         eq_(len(mock_datapusher_submit.mock_calls), 1)
