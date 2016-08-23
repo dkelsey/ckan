@@ -1,4 +1,4 @@
-__version__ = '2.5.3-bcgov'
+__version__ = '2.5.4-bcgov'
 
 __description__ = 'CKAN Software'
 __long_description__ = \
