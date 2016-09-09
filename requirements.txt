@@ -31,6 +31,7 @@ Pylons==0.9.7
 python-dateutil==1.5
 pytz==2012j
 pyutilib.component.core==4.5.3
+python-magic==0.4.6
 repoze.lru==0.6           # via routes
 repoze.who-friendlyform==1.0.8
 repoze.who==2.0
