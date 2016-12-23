@@ -86,6 +86,10 @@ def make_map():
     map.minimization = False
     map.explicit = True
 
+    # CUSTOM ROUTES HERE
+    for plugin in p.PluginImplementations(p.IRoutes):
+        map = plugin.before_map(map)
+
     # The ErrorController route (handles 404/500 error pages); it should
     # likely stay at the top, ensuring it can always be resolved.
     map.connect('/error/{action}', controller='error')
@@ -93,10 +97,6 @@ def make_map():
 
     map.connect('*url', controller='home', action='cors_options',
                 conditions=OPTIONS)
-
-    # CUSTOM ROUTES HERE
-    for plugin in p.PluginImplementations(p.IRoutes):
-        map = plugin.before_map(map)
 
     map.connect('home', '/', controller='home', action='index')
     map.connect('about', '/about', controller='home', action='about')
