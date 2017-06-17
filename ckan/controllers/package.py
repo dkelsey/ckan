@@ -415,7 +415,8 @@ class PackageController(base.BaseController):
                 h.redirect_to(controller='revision', action='diff', **params)
 
         context = {'model': model, 'session': model.Session,
-                   'user': c.user or c.author, 'auth_user_obj': c.userobj}
+                   'user': c.user, 'auth_user_obj': c.userobj,
+                   'for_view': True}
         data_dict = {'id': id}
         try:
             c.pkg_dict = get_action('package_show')(context, data_dict)
@@ -585,12 +586,7 @@ class PackageController(base.BaseController):
             # dataset has not yet been fully created
             resource_dict = get_action('resource_show')(context,
                                                         {'id': resource_id})
-            fields = ['url', 'resource_type', 'format', 'name', 'description',
-                      'id']
-            data = {}
-            for field in fields:
-                data[field] = resource_dict[field]
-            return self.new_resource(id, data=data)
+            return self.new_resource(id, data=resource_dict)
         # resource is fully created
         try:
             resource_dict = get_action('resource_show')(context,
@@ -751,7 +747,9 @@ class PackageController(base.BaseController):
         if context['save'] and not data:
             return self._save_edit(id, context, package_type=package_type)
         try:
-            c.pkg_dict = get_action('package_show')(context, {'id': id})
+            c.pkg_dict = get_action('package_show')(dict(context,
+                                                         for_view=True),
+                                                    {'id': id})
             context['for_edit'] = True
             old_data = get_action('package_show')(context, {'id': id})
             # old data is from the database and data is passed from the

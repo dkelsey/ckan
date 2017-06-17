@@ -196,6 +196,7 @@ def package_create(context, data_dict):
     context_org_update = context.copy()
     context_org_update['ignore_auth'] = True
     context_org_update['defer_commit'] = True
+    context_org_update['add_revision'] = False
     _get_action('package_owner_org_update')(context_org_update,
                                             {'id': pkg.id,
                                              'organization_id': pkg.owner_org})
@@ -327,6 +328,16 @@ def resource_create(context, data_dict):
     ##  Run package show again to get out actual last_resource
     updated_pkg_dict = _get_action('package_show')(context, {'id': package_id})
     resource = updated_pkg_dict['resources'][-1]
+
+    ##  Add the default views to the new resource
+    logic.get_action('resource_create_default_resource_views')(
+        {'model': context['model'],
+         'user': context['user'],
+         'ignore_auth': True
+         },
+        {'resource': resource,
+         'package': updated_pkg_dict
+         })
 
     for plugin in plugins.PluginImplementations(plugins.IResourceController):
         plugin.after_create(context, resource)
@@ -1441,6 +1452,9 @@ def _group_or_org_member_create(context, data_dict, is_org=False):
 
     schema = ckan.logic.schema.member_schema()
     data, errors = _validate(data_dict, schema, context)
+    if errors:
+        model.Session.rollback()
+        raise ValidationError(errors)
 
     username = _get_or_bust(data_dict, 'username')
     role = data_dict.get('role')
