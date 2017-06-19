@@ -7,6 +7,55 @@
 Changelog
 ---------
 
+v2.5.5 2017-03-22
+=================
+
+* Use fully qualified urls for reset emails (#3486)
+* Fix edit_resource for resource with draft state (#3480)
+* Tag fix for group/organization pages (#3460)
+* Setting of datastore_active flag moved to separate function (#3481)
+
+v2.5.4 2017-02-22
+=================
+
+
+ * Fix DataPusher being fired multiple times (#3245)
+ * Use the url_for() helper for datapusher URLs (#2866)
+ * Resource creation date use datetime.utcnow() (#3447)
+ * Fix locale error when using fix ckan.root_path
+ * `render_markdown` breaks links with ampersands
+ * Check group name and id during package creation
+ * Use utcnow() on dashboard_mark_activities_old (#3373)
+ * Fix encoding error on DataStore exception
+ * Datastore doesn't add site_url to resource created via API (#3189)
+ * Fix memberships after user deletion (#3265)
+ * Remove idle database connection (#3260)
+ * Fix package_owner_org_update action when called via the API (#2661)
+
+
+v2.5.3 2016-11-02
+=================
+
+ * DataPusher called multiple times when creating a dataset (#2856)
+ * Default view is re-added when removed before DataStore upload is complete (#3011)
+ * "Data API" button disappears on resource page after empty update (#3012)
+ * Uncaught email exceptions on user invite (#3077)
+ * Resource view description is not rendered as Markdown (#3128)
+ * Fix broken html5lib dependency (#3180)
+ * ZH_cn translation formatter fix (#3238)
+ * Incorrect i18n-paths in extension's setup.cfg (#3275)
+ * Changing your user name produces an error and logs you out (#2394)
+ * Fix "Load more" functionality in the dashboard (#2346)
+ * Fix filters not working when embedding a resource view (#2657)
+ * Proper sanitation of header name on SlickGrid view (#2923)
+ * Fix unicode error when indexing field of type JSON (#2969)
+ * Fix group feeds returning no datasets (#2955)
+ * Replace MapQuest tiles in Recline with Stamen Terrain (#3162)
+ * Fix bulk operations not taking effect (#3199)
+ * Raise validation errors on group/org_member_create (#3108)
+ * Incorrect warnings when ckan.views.default_views is empty (#3093)
+ * Don't show deleted users/datasets on member_list (#3078)
+
 v2.5.2 2016-03-31
 =================
 
@@ -84,6 +133,36 @@ v2.5.0 2015-12-17
 =================
 
 Cancelled release
+
+v2.4.5 2017-02-22
+=================
+
+ * Use the url_for() helper for datapusher URLs (#2866)
+ * Resource creation date use datetime.utcnow() (#3447)
+ * Fix locale error when using fix ckan.root_path
+ * `render_markdown` breaks links with ampersands
+ * Check group name and id during package creation
+ * Use utcnow() on dashboard_mark_activities_old (#3373)
+ * Fix encoding error on DataStore exception
+ * Datastore doesn't add site_url to resource created via API (#3189)
+ * Fix memberships after user deletion (#3265)
+ * Remove idle database connection (#3260)
+ * Fix package_owner_org_update action when called via the API (#2661)
+
+v2.4.4 2016-11-02
+=================
+
+ * Changing your user name produces an error and logs you out (#2394)
+ * Fix "Load more" functionality in the dashboard (#2346)
+ * Fix filters not working when embedding a resource view (#2657)
+ * Proper sanitation of header name on SlickGrid view (#2923)
+ * Fix unicode error when indexing field of type JSON (#2969)
+ * Fix group feeds returning no datasets (#2955)
+ * Replace MapQuest tiles in Recline with Stamen Terrain (#3162)
+ * Fix bulk operations not taking effect (#3199)
+ * Raise validation errors on group/org_member_create (#3108)
+ * Incorrect warnings when ckan.views.default_views is empty (#3093)
+ * Don't show deleted users/datasets on member_list (#3078)
 
 v2.4.3 2016-03-31
 =================
@@ -211,6 +290,20 @@ Changes and deprecations
 
 * Config option ``site_url`` is now required - CKAN will not abort during
   start-up if it is not set. (#1976)
+
+v2.3.5 2016-11-02
+=================
+
+ * Fix "Load more" functionality in the dashboard (#2346)
+ * Fix filters not working when embedding a resource view (#2657)
+ * Proper sanitation of header name on SlickGrid view (#2923)
+ * Fix unicode error when indexing field of type JSON (#2969)
+ * Fix group feeds returning no datasets (#2955)
+ * Replace MapQuest tiles in Recline with Stamen Terrain (#3162)
+ * Fix bulk operations not taking effect (#3199)
+ * Raise validation errors on group/org_member_create (#3108)
+ * Incorrect warnings when ckan.views.default_views is empty (#3093)
+ * Don't show deleted users/datasets on member_list (#3078)
 
 v2.3.4 2016-03-31
 =================
