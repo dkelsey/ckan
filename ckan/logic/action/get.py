@@ -460,6 +460,13 @@ def _group_or_org_list(context, data_dict, is_org=False):
     query = query.filter(model.Group.state == 'active')
 
     if groups:
+
+        try:
+            import ast
+            groups = ast.literal_eval(groups)
+        except Exception:
+            pass
+
         query = query.filter(model.Group.name.in_(groups))
     if q:
         q = u'%{0}%'.format(q)
