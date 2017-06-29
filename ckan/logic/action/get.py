@@ -424,7 +424,11 @@ def _group_or_org_list(context, data_dict, is_org=False):
     sort = data_dict.get('sort') or 'name'
     q = data_dict.get('q')
 
-    all_fields = asbool(data_dict.get('all_fields', None))
+    try:
+        # This was generating an HTTP 500 for non-truthy non-falsy values
+        all_fields = asbool(data_dict.get('all_fields', None))
+    except ValueError:
+        all_fields = None
 
     # order_by deprecated in ckan 1.8
     # if it is supplied and sort isn't use order_by and raise a warning
